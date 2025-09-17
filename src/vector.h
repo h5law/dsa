@@ -22,6 +22,7 @@ struct vector {
 struct vector *vector_init(void);
 int            vector_set(struct vector *vec, uintptr_t value, size_t index);
 uintptr_t      vector_get(struct vector *vec, size_t index);
+int vector_delete(struct vector *vec, size_t index);
 void           vector_deinit(struct vector *vec, int dealloc);
 
 #endif /* VECTOR_H */

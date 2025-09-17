@@ -6,18 +6,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-/* Structure declarations */
-#define VECTOR_RESIZE_FACTOR    2
-#define VECTOR_LOAD_FACTOR      0.75F
-#define VECTOR_DEFAULT_CAPACITY 64
-#define VECTOR_MAX_CAPACITY     32768
-
-struct vector {
-    uintptr_t *buffer;
-    size_t     capacity;
-    size_t     count;
-};
-
 struct bucket {
     struct bucket *next;
     const void    *key;
@@ -30,12 +18,6 @@ struct hashmap {
     struct vector *vec;
     size_t         size;
 };
-
-/* Vector functions */
-struct vector *vector_init(void);
-int            vector_set(struct vector *vec, uintptr_t value, size_t index);
-uintptr_t      vector_get(struct vector *vec, size_t index);
-void           vector_deinit(struct vector *vec, int dealloc);
 
 /* Hasher functions */
 uint64_t fnv1a_block_hash(const unsigned char *data, size_t len);

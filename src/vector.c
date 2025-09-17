@@ -101,6 +101,6 @@ int main(void)
     return 0;
 }
 
-#endif /* DBEUG_TESTS */
+#endif /* DEBUG_TESTS */
 
 // vim: ft=c ts=4 sts=4 sw=4 et ai cin
