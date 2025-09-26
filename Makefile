@@ -1,5 +1,6 @@
 CFLAGS = -xc -std=c99
 CFLAGS += -march=native -O2 -pipe
+# CFLAGS += -march=native -O3 -pipe
 # CFLAGS += -funroll-loops -ffast-math
 CFLAGS += -Wall -Wextra -pedantic
 # CFLAGS += -g -MD -DDEBUG_TESTS
