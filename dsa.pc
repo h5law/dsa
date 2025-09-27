@@ -1,0 +1,10 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: dsa
+Description: A collection of Data Structures and Algorithms for C
+Version: 1.0.0
+Libs: -L${libdir} -ldsa
+Cflags: -I${includedir}
