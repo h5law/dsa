@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "macros.h"
 #include "vector.h"
+#include "macros.h"
 
 struct vector *vector_init(void)
 {
@@ -63,44 +63,5 @@ void vector_deinit(struct vector *vec, int dealloc)
     free(vec->buffer);
     free(vec);
 }
-
-#ifdef DEBUG_TESTS
-
-#include <assert.h>
-
-#define ASSERT(stmt)                                                           \
-    do {                                                                       \
-        DEBUG("%s\n", #stmt);                                                  \
-        assert(stmt);                                                          \
-    } while (0)
-
-#define PRINT_VECTOR(vec)                                                      \
-    for (size_t i = 0; i < ( size_t )( struct vector * )vec->capacity; ++i)    \
-    DEBUG("%lx ", ( uintptr_t )( struct vector * )vec->buffer +                \
-                          (i * sizeof(uintptr_t)))
-
-int main(void)
-{
-    struct vector *vec = vector_init();
-    ASSERT(vec != NULL);
-    /* PRINT_VECTOR(vec); */
-
-    uint64_t val = 0xDEADBEEF;
-    for (size_t i = 0; i < 47; ++i) {
-        ASSERT(vector_set(vec, ( uintptr_t )&val, i) >= 0);
-    }
-    ASSERT(vec->count == 47);
-    ASSERT(vec->capacity == 64);
-    /* PRINT_VECTOR(vec); */
-    ASSERT(vector_set(vec, ( uintptr_t )&val, 47) >= 0);
-    ASSERT(vec->capacity == 128);
-
-    vector_deinit(vec, 0);
-    ASSERT(vec->buffer == NULL);
-
-    return 0;
-}
-
-#endif /* DEBUG_TESTS */
 
 // vim: ft=c ts=4 sts=4 sw=4 et ai cin

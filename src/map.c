@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "macros.h"
 #include "vector.h"
 #include "map.h"
+#include "macros.h"
 
 /* FNV-1a standard initial prime offset */
 #define HASH_VALUE_OFFSET 0XCBF29CE484222325

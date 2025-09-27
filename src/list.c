@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "macros.h"
 #include "list.h"
+#include "macros.h"
 
 int ll_push(struct ll_t *list, struct l_item_t *item)
 {
@@ -31,7 +31,7 @@ int ll_push(struct ll_t *list, struct l_item_t *item)
     return 0;
 }
 
-struct l_item_t* ll_peek(struct ll_t *list)
+struct l_item_t *ll_peek(struct ll_t *list)
 {
     if (!list->tail) {
         return NULL;
@@ -50,7 +50,7 @@ struct l_item_t* ll_peek(struct ll_t *list)
     return NULL;
 }
 
-struct l_item_t* ll_pop(struct ll_t *list)
+struct l_item_t *ll_pop(struct ll_t *list)
 {
     struct l_item_t *ret = NULL;
     if (!list->tail) {
@@ -73,7 +73,8 @@ struct l_item_t* ll_pop(struct ll_t *list)
     return ret;
 }
 
-struct l_item_t* ll_find(struct ll_t *list, const uint8_t *data, size_t data_len)
+struct l_item_t *ll_find(struct ll_t *list, const uint8_t *data,
+                         size_t data_len)
 {
     struct l_item_t *b = list->tail;
     if (b == NULL || list->size == 0) {
@@ -83,10 +84,10 @@ struct l_item_t* ll_find(struct ll_t *list, const uint8_t *data, size_t data_len
     do {
         if (memcmp(b->data, data, data_len) != 0) {
             DEBUG("Single list entry not a match\n")
-                return NULL;
+            return NULL;
         } else {
             DEBUG("Item found in list")
-                return b;
+            return b;
         }
         b = b->next;
     } while (b->next);

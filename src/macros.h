@@ -3,6 +3,10 @@
 #ifndef MACROS_H
 #define MACROS_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef NO_DEBUG
 #include <stdio.h>
 #define DEBUG(...)                                                             \
@@ -13,6 +17,10 @@
 #else
 #define NO_DEBUG
 #define DEBUG(...)
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif /* MACROS_H */
