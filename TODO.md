@@ -1,6 +1,5 @@
 - Stacks
 - Queues
-- Linked Lists
-- Doubly Linked Lists
 - Binary Trees
 - ...
+- Increase example usages of the library
