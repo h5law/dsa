@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "list.h"
+#include "dlist.h"
 #include "macros.h"
 
 /* Push item to the head of the DLL */

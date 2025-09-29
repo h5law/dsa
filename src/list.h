@@ -42,4 +42,4 @@ struct l_item_t *ll_find(struct ll_t *list, const uint8_t *data,
 
 #endif /* LIST_H */
 
-/rrvim: ft=c ts=4 sts=4 sw=4 et ai cin
+// vim: ft=c ts=4 sts=4 sw=4 et ai cin
