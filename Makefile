@@ -3,7 +3,7 @@ AR := llvm-ar
 
 CFLAGS := -xc -std=c99
 CFLAGS += -march=native -O2 -pipe
-CFLAGS += -fPIC
+CFLAGS += -fPIC -DNO_DEBUG
 # CFLAGS += -march=native -O3 -pipe
 # CFLAGS += -funroll-loops -ffast-math
 CFLAGS += -Wall -Wextra -pedantic

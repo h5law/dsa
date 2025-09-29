@@ -58,7 +58,6 @@ struct l_item_t *ll_pop(struct ll_t *list)
         DEBUG("No tail in list\n")
     } else {
         if (!list->tail->next) {
-            --list->size;
             ret = list->tail;
         } else {
             DEBUG("Finding head of list\n");
@@ -67,8 +66,8 @@ struct l_item_t *ll_pop(struct ll_t *list)
             }
             ret = list->tail->next;
         }
-        --list->size;
     }
+    --list->size;
     ret->next = NULL;
     return ret;
 }

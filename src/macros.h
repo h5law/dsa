@@ -15,7 +15,6 @@ extern "C" {
         fprintf(stderr, __VA_ARGS__);                                          \
     } while (0);
 #else
-#define NO_DEBUG
 #define DEBUG(...)
 #endif
 

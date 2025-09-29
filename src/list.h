@@ -11,16 +11,12 @@ extern "C" {
 #include <stdlib.h>
 
 #define NEW_LITEM(data, size)                                                  \
-    do {                                                                       \
-        struct l_item_t item = {0};                                            \
-        item.data            = ( const uint8_t * )data;                        \
-        item.size            = ( size_t )size;                                 \
-        item.next            = NULL;                                           \
-        return item;                                                           \
-    } while (0)
+    ((struct l_item_t){ .data = (const uint8_t *)(data),                       \
+                        .size = (size_t)(size),                                \
+                        .next = NULL })
 
 struct l_item_t {
-    uint8_t         *data; /* Item data byte stream */
+    const uint8_t   *data; /* Item data byte stream */
     size_t           size;
     struct l_item_t *next;
 };
