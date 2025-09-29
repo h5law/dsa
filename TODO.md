@@ -1,5 +1,8 @@
 - Stacks
 - Queues
 - Binary Trees
+- K-Ary Trees
+- B-Trees
 - ...
 - Increase example usages of the library
+  - Add Makefile target to compile examples
