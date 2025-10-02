@@ -13,7 +13,6 @@ ARFLAGS = rcs
 
 SRCDIR = src
 LIBDIR = lib
-TESTDIR = test
 EXAMPLES = examples
 
 SRCS = \
@@ -40,7 +39,7 @@ INSTALL_PC   := $(PREFIX)/share/pkgconfig
 all: clean build
 
 always:
-	mkdir -p $(SRCDIR) $(LIBDIR) $(TESTDIR) $(EXAMPLES)
+	mkdir -p $(SRCDIR) $(LIBDIR) $(EXAMPLES)
 
 $(SRCDIR)/%.o: $(SRCDIR)/%.c
 	@echo "Building $@ without debug logs"
