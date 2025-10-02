@@ -1,3 +1,4 @@
+- [ ] Add error codes per DS/A
 - [ ] Stacks
 - [ ] Queues
 - [ ] Binary Trees
