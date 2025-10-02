@@ -22,11 +22,11 @@ SRCS = \
 OBJS = $(SRCS:.c=.o)
 HEADERS = $(SRCS:.c=.h)
 
-# DEMOS = \
-# 		$(EXAMPLES)/demo_vector.c \
-# 		$(EXAMPLES)/demo_list.c
-# DEMO_OBJS = $(DEMOS:.c=.o)
-# EXES = $(DEMO_OBJS:.o=)
+DEMOS = \
+		$(EXAMPLES)/demo_vector.c \
+		$(EXAMPLES)/demo_list.c
+DEMO_OBJS = $(DEMOS:.c=.o)
+EXES = $(DEMO_OBJS:.o=)
 
 LIBNAME = dsa
 PKGCONF = dsa.pc
@@ -85,6 +85,7 @@ clean:
 	rm -f *.d */*.d */**/*.d
 	rm -f *.i */*.i */**/*.i
 	rm -f $(LIBDIR)/*
+	rm -f $(EXES)
 
 .PHONY: all clean build buid-examples install deinstall
 
