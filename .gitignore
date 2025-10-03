@@ -3,3 +3,5 @@
 *.d
 *.core
 lib/
+examples/demo_list
+examples/demo_vector
