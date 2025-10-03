@@ -13,8 +13,8 @@ extern "C" {
 /* Structure declarations */
 #define VECTOR_RESIZE_FACTOR    2
 #define VECTOR_LOAD_FACTOR      0.75F
-#define VECTOR_DEFAULT_CAPACITY 64
-#define VECTOR_MAX_CAPACITY     32768
+#define VECTOR_DEFAULT_CAPACITY (size_t)64
+#define VECTOR_MAX_CAPACITY     (size_t)32768
 
 struct vector {
     uintptr_t *buffer;
