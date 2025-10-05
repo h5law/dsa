@@ -28,6 +28,8 @@ uint64_t fnv1a_block_hash(const unsigned char *data, size_t len);
 #define HASH_REDUCE(hash, vec)                                                 \
     ((( uint64_t )hash) & ( uint64_t )((( struct vector * )vec->capacity - 1)))
 
+struct bucket new_item(const void *key, size_t key_len, uintptr_t value);
+
 struct hashmap *hashmap_init(void);
 int hashmap_set(struct hashmap *map, const unsigned char *key, size_t key_len,
                 uintptr_t value);
