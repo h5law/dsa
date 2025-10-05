@@ -21,11 +21,11 @@ int vector_set(struct vector *vec, uintptr_t value, size_t index)
     size_t new_count = vec->count + 1;
     if (index > vec->capacity) {
         DEBUG("Vector index out of bounds\n")
-        return -1;
+        return 1;
     }
     if (new_count >= VECTOR_MAX_CAPACITY) {
         DEBUG("Vector over capacity\n")
-        return -2;
+        return 2;
     }
     vec->buffer[index] = value;
     if ((4 * new_count >= 3 * vec->capacity) &&
@@ -77,8 +77,12 @@ void vector_deinit(struct vector *vec, int dealloc)
             free(( void * )vec->buffer[i]);
     }
     DEBUG("Freeing the vector and its buffer\n")
+    // size_t tmp = vec->capacity;
+    // uint8_t zero = 0;
+    vec->count = 0;
+    vec->capacity = 0;
     free(vec->buffer);
-    free(vec);
+    //free(memcmp((uint8_t *)vec, &zero, tmp + sizeof(struct vector)) == 0);
 }
 
 // vim: ft=c ts=4 sts=4 sw=4 et ai cin

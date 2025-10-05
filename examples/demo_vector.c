@@ -30,6 +30,7 @@ int main(void)
     assert(vector_set(vec, ( uintptr_t )&val, 47) == 0);
     assert(vec->capacity == 128);
     assert(vec->count == 48);
+    assert(memcmp((uint8_t *)vec->buffer, &zero, tmp) == 0);
     printf("Old cap: %zu\tNew cap: %zu\tCount: %zu\n", VECTOR_DEFAULT_CAPACITY, vec->capacity, vec->count);
 
     printf("Testing get produces correct value\n");
@@ -39,6 +40,13 @@ int main(void)
     assert(res == 0xDEADBEEF);
 
     vector_deinit(vec, 0);
+    //assert(memcmp((uint8_t *)vec->buffer, &zero, tmp) == 0);
+    assert(memcmp((struct basket *)(void *)val, &zero, \
+            (size_t)((struct basket *)(void *)val->capacity)) == 0);
+    assert(vec->buffer == NULL);
+    assert(vec->count == 0);
+    assert(vec->capacity == 0);
+    assert(vec == NULL);
 
     return 0;
 }
