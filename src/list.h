@@ -23,19 +23,17 @@ struct ll_t {
 
 static inline struct l_item_t new_litem(const uint8_t *data, size_t len)
 {
-    return (struct l_item_t){
-        .data = (const uint8_t *)data,
-        .size = len,
-        .next = NULL };
+    return ( struct l_item_t ){
+            .data = ( const uint8_t * )data, .size = len, .next = NULL};
 }
 
 int ll_add(struct ll_t *list, struct l_item_t *item);
 int ll_put(struct ll_t *list, struct l_item_t *item);
 
 int ll_add_after(struct ll_t *list, struct l_item_t *item,
-                  struct l_item_t *new);
+                 struct l_item_t *new_item);
 int ll_add_before(struct ll_t *list, struct l_item_t *item,
-                  struct l_item_t *new);
+                  struct l_item_t *new_item);
 
 int ll_delete_after(struct ll_t *list, struct l_item_t *item);
 int ll_delete_before(struct ll_t *list, struct l_item_t *item);

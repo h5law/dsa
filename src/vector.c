@@ -7,12 +7,12 @@
 #include "vector.h"
 #include "macros.h"
 
-struct vector *vector_init(void)
+struct vector vector_init(void)
 {
-    DEBUG("Initialising vecor, callocating space\n")
-    struct vector *vec = calloc(1, sizeof(struct vector));
-    vec->buffer        = calloc(1, VECTOR_DEFAULT_CAPACITY * sizeof(uintptr_t));
-    vec->capacity      = (size_t)VECTOR_DEFAULT_CAPACITY;
+    struct vector vec = {0};
+    DEBUG("Initialising vector, calloc-ating space\n")
+    vec.buffer   = calloc(1, VECTOR_DEFAULT_CAPACITY * sizeof(uintptr_t));
+    vec.capacity = ( size_t )VECTOR_DEFAULT_CAPACITY;
     return vec;
 }
 
@@ -37,7 +37,7 @@ int vector_set(struct vector *vec, uintptr_t value, size_t index)
                (new_cap / 2) * sizeof(uintptr_t));
         vec->capacity = new_cap;
     }
-    vec->count         = new_count;
+    vec->count = new_count;
     DEBUG("Added value at index %zu\n", index)
     return 0;
 }
@@ -79,10 +79,11 @@ void vector_deinit(struct vector *vec, int dealloc)
     DEBUG("Freeing the vector and its buffer\n")
     // size_t tmp = vec->capacity;
     // uint8_t zero = 0;
-    vec->count = 0;
+    vec->count    = 0;
     vec->capacity = 0;
     free(vec->buffer);
-    //free(memcmp((uint8_t *)vec, &zero, tmp + sizeof(struct vector)) == 0);
+    vec->buffer = NULL;
+    // free(memcmp((uint8_t *)vec, &zero, tmp + sizeof(struct vector)) == 0);
 }
 
 // vim: ft=c ts=4 sts=4 sw=4 et ai cin

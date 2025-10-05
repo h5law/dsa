@@ -4,49 +4,51 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include <dsa/vector.h>
 
 int main(void)
 {
-    uintptr_t ptr = 0;
-    uint64_t res = 0;
-    uint64_t val = 0xDEADBEEF;
+    int           rc   = 0;
+    uintptr_t     ptr  = 0;
+    uint64_t      res  = 0;
+    uint8_t       zero = 0;
+    uint64_t      val  = 0xDEADBEEF;
+    struct vector vec  = {0};
 
     printf("Testing vector_init\n");
-    struct vector *vec = vector_init();
-    assert(vec != NULL);
+    vec = vector_init();
+    assert(memcmp(&vec, &zero, sizeof(struct vector)) != 0);
 
     printf("Testing vector_set up to load factor\n");
-    assert(vec->count == 0 && vec->capacity == 64);
+    assert(vec.count == 0 && vec.capacity == 64);
     for (size_t i = 0; i < 47; ++i) {
-        int rc = vector_set(vec, (uintptr_t)(void *)&val, i);
-        assert(vec->count == i+1 && vec->capacity == 64);
+        rc = vector_set(&vec, ( uintptr_t )( void * )&val, i);
+        assert(vec.count == i + 1 && vec.capacity == 64);
     }
-    assert(vec->count == 47);
-    assert(vec->capacity == 64);
+    assert(vec.count == 47);
+    assert(vec.capacity == 64);
 
     printf("Testing vector_set grows in capacity at load factor\n");
-    assert(vector_set(vec, ( uintptr_t )&val, 47) == 0);
-    assert(vec->capacity == 128);
-    assert(vec->count == 48);
-    assert(memcmp((uint8_t *)vec->buffer, &zero, tmp) == 0);
-    printf("Old cap: %zu\tNew cap: %zu\tCount: %zu\n", VECTOR_DEFAULT_CAPACITY, vec->capacity, vec->count);
+    assert(vector_set(&vec, ( uintptr_t )&val, 47) == 0);
+    assert(vec.capacity == 128);
+    assert(vec.count == 48);
+
+    printf("Old cap: %zu\tNew cap: %zu\tCount: %zu\n", VECTOR_DEFAULT_CAPACITY,
+           vec.capacity, vec.count);
 
     printf("Testing get produces correct value\n");
-    ptr = vector_get(vec, 24);
+    ptr = vector_get(&vec, 24);
     assert(ptr != 0);
-    res = *((uint64_t *)(uintptr_t)ptr);
+    res = *(( uint64_t * )( uintptr_t )ptr);
     assert(res == 0xDEADBEEF);
 
-    vector_deinit(vec, 0);
-    //assert(memcmp((uint8_t *)vec->buffer, &zero, tmp) == 0);
-    assert(memcmp((struct basket *)(void *)val, &zero, \
-            (size_t)((struct basket *)(void *)val->capacity)) == 0);
-    assert(vec->buffer == NULL);
-    assert(vec->count == 0);
-    assert(vec->capacity == 0);
-    assert(vec == NULL);
+    vector_deinit(&vec, 0);
+    assert(memcmp(( struct basket * )( void * )val, &zero, vec.capacity) == 0);
+    assert(vec.buffer == NULL);
+    assert(vec.count == 0);
+    assert(vec.capacity == 0);
 
     return 0;
 }
