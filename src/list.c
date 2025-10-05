@@ -118,6 +118,43 @@ int ll_delete_after(struct ll_t *list, struct l_item_t *item)
     return 2;
 }
 
+int ll_delete(struct ll_t *list, struct l_item_t *item)
+{
+    struct l_item_t *b = NULL;
+    struct l_item_t *b2 = list->tail;
+    struct l_item_t *b3 = b2->next;
+    if (list->size == 0 || list->tail == NULL) {
+        DEBUG("List is empty\n");
+        return 1;
+    }
+    if (memcmp(list->tail->data, item->data, item->size) == 0) {
+        DEBUG("Removing item from list\n")
+        struct l_item_t *tmp = list->tail->next;
+        list->tail = list->tail->next;
+        free(tmp);
+        --list->size;
+        return 0;
+    }
+    if (b2 != NULL)
+        b3 = b2->next;
+    DEBUG("Searching for target item\n")
+    while (memcmp(b3->data, item->data, item->size) != 0) {
+        if (memcmp(b3->data, item->data, item->size) == 0) {
+            DEBUG("Removing item before target item\n")
+            if (b2 != NULL)
+                b2->next = b3;
+            if (b2 == list->tail)
+                list->tail = b;
+            --list->size;
+            return 0;
+        }
+        b = b2;
+        b2 = b3;
+        b3 = b3->next;
+    }
+    return 2;
+}
+
 int ll_delete_before(struct ll_t *list, struct l_item_t *item)
 {
     struct l_item_t *b = NULL;
